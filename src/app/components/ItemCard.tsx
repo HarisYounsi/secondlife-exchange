@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import {Card, CardContent, CardFooter, CardHeader} from "./ui/card";
-import {Button} from "./ui/button";
-import {Avatar, AvatarFallback, AvatarImage} from "./ui/avatar";
-import {ThumbsUp, MessageCircle, CheckCircle2} from "lucide-react";
-import {Item} from "../data/items";
-import {ItemDetailsDialog} from "./ItemDetailsDialog";
+import React, { useState } from "react";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { ThumbsUp, MessageCircle, CheckCircle2 } from "lucide-react";
+import { Item } from "../data/items";
+import { ItemDetailsDialog } from "./ItemDetailsDialog";
 
 interface ItemCardProps {
   item: Item;
@@ -24,7 +24,7 @@ const conditionLabels: Record<string, string> = {
   fair: "Correct",
 };
 
-export const ItemCard: React.FC<ItemCardProps> = ({item, onVote, onContact}) => {
+export const ItemCard: React.FC<ItemCardProps> = ({ item, onVote, onContact }) => {
   const isExchanged = item.status === "exchanged";
   const conditionClass =
     conditionStyles[item.condition] ||
@@ -148,8 +148,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({item, onVote, onContact}) => 
         item={selectedItem}
         open={showDetails}
         onOpenChange={setShowDetails}
-        onContact={onContact || (() => {})}
-        currentUserId={item.userId}
+        onContact={onContact || (() => { })}
+        currentUserId={item.userId}  // ❌ ERREUR ICI
       />
     </>
   );
