@@ -42,6 +42,12 @@ export const ItemDetailsDialog: React.FC<ItemDetailsDialogProps> = ({
 
   const isExchanged = item.status === 'exchanged';
   const isOwnItem = item.userId === currentUserId;
+  console.log("🔍 DEBUG MODAL:", {
+  itemUserId: item.userId,
+  currentUserId: currentUserId,
+  isOwnItem: isOwnItem,
+  isExchanged: isExchanged
+});
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -123,6 +129,7 @@ export const ItemDetailsDialog: React.FC<ItemDetailsDialogProps> = ({
               onClick={() => {
                 onOpenChange(false);
                 onContact(item);
+                
               }}
               disabled={isExchanged || isOwnItem}
             >
