@@ -17,29 +17,34 @@ export const Signup: React.FC<SignupProps> = ({ onSwitchToLogin, onClose }) => {
   const { signup, loginWithGoogle } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (password !== confirmPassword) {
-      toast.error('Les mots de passe ne correspondent pas');
-      return;
-    }
+  e.preventDefault();
+  
+  if (password !== confirmPassword) {
+    toast.error('Les mots de passe ne correspondent pas');
+    return;
+  }
 
-    if (password.length < 6) {
-      toast.error('Le mot de passe doit contenir au moins 6 caractères');
-      return;
-    }
+  // Validation mot de passe fort
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  
+  if (!passwordRegex.test(password)) {
+    toast.error('Le mot de passe doit contenir :\n• Au moins 8 caractères\n• 1 majuscule\n• 1 minuscule\n• 1 chiffre\n• 1 caractère spécial (@$!%*?&)', {
+      duration: 6000
+    });
+    return;
+  }
 
-    setIsLoading(true);
-    try {
-      await signup(name, email, password);
-      toast.success('Compte créé avec succès !');
-      onClose();
-    } catch (error: any) {
-      toast.error(error.message || 'Erreur lors de la création du compte');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  setIsLoading(true);
+  try {
+    await signup(name, email, password);
+    toast.success('Compte créé avec succès !');
+    onClose();
+  } catch (error: any) {
+    toast.error(error.message || 'Erreur lors de la création du compte');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleGoogleSignup = async () => {
     try {
@@ -134,7 +139,7 @@ export const Signup: React.FC<SignupProps> = ({ onSwitchToLogin, onClose }) => {
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
               Mot de passe
             </label>
-            <input
+           <input
               id="password"
               type="password"
               value={password}
@@ -143,6 +148,9 @@ export const Signup: React.FC<SignupProps> = ({ onSwitchToLogin, onClose }) => {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
               placeholder="••••••••"
             />
+            <p className="text-xs text-gray-600 mt-1">
+              Min 8 caractères : 1 Maj, 1 min, 1 chiffre, 1 spécial (@$!%*?&)
+            </p>
           </div>
 
           <div>

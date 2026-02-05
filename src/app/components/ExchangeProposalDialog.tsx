@@ -172,11 +172,11 @@ export const ExchangeProposalDialog: React.FC<ExchangeProposalDialogProps> = ({
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="excellent">Excellent - Comme neuf</SelectItem>
                 <SelectItem value="good">Bon - Quelques traces d'usage</SelectItem>
                 <SelectItem value="fair">Correct - Signes d'usure visibles</SelectItem>
-              </SelectContent>
+              </SelectContent >
             </Select>
           </div>
 

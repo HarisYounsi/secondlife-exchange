@@ -78,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onLogin
                     </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-64 p-2" align="end">
+                <DropdownMenuContent className="w-64 p-2 bg-white" align="end">
                   {/* En-tête avec infos utilisateur */}
                   <div className="px-3 py-3 mb-2 bg-emerald-50 rounded-lg">
                     <div className="flex items-center gap-3">
